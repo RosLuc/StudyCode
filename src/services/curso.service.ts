@@ -1,29 +1,28 @@
-import Curso from "../models/Curso";
+import { Curso } from "../entities/Curso";
+import { ICurso } from "../interfaces/curso";
+import { ICursoRepository } from "../interfaces/cursoRepository";
 
-export default class CursoService {
-  private cursos: Curso[];
+export class CursoService {
+  constructor(private cursoRepository: ICursoRepository) {}
 
-  constructor(cursos: Curso[]) {
-    this.cursos = cursos;
+  public cadastrar(curso: ICurso) {
+    const cursoJaExiste = this.cursoRepository.buscarPorTitulo(curso.titulo);
+    if (cursoJaExiste) throw new Error("Curso já existe");
+    const novoCurso = new Curso(curso);
+    this.cursoRepository.save(novoCurso);
   }
 
-  public cadastrar(curso: Curso) {
-    this.cursos.push(curso);
-  }
-
-  public buscarPorCategoria(categoria: string): Curso[] {
-    return this.cursos.filter((curso) => {
-      return curso.getCategoria() === categoria
-    });
+  public buscarPorCategoria(categoria: string) {
+    return this.cursoRepository.buscarPorCategoria(categoria);
   }
 
   public listar(): Curso[] {
-    return this.cursos;
+    return this.cursoRepository.listar();
   }
 
   public removerCurso(titulo: string) {
-    this.cursos = this.cursos.filter((curso) => {
-      return curso.getTitulo() !== titulo;
-    })
+    const cursoJaExiste = this.cursoRepository.buscarPorTitulo(titulo);
+    if (!cursoJaExiste) throw new Error("Curso não encontrado");
+    this.cursoRepository.removerPorTitulo(titulo);
   }
 }

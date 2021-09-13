@@ -1,9 +1,13 @@
-export default class Usuario {
+import { uuid } from "uuidv4";
+
+export class Usuario {
+  private id: string;
   private email: string;
   private senha: string;
   private nome: string;
 
-  constructor(email: string, senha: string, nome: string) {
+  constructor(email: string, senha: string, nome: string, id?: string) {
+    this.id = id ? id : uuid();
     this.email = email;
     this.senha = senha;
     this.nome = nome;

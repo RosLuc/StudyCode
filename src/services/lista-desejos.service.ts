@@ -1,22 +1,16 @@
-import Comum from "../models/Comum";
-import Curso from "../models/Curso";
+import ListaDesejo from "../entities/ListaDesejo";
+import { IListaDesejo } from "../interfaces/listaDesejo";
+import { ListaDesejoRepository } from "../repositories/listaDesejo.repository";
 
 export default class ListaDesejoService {
+  constructor(private listaDesejoRepository: ListaDesejoRepository) {}
 
-  public cadastrarCurso(usuario: Comum, curso: Curso): void {
-    const listaDesejo = usuario.getListaDesejo();
-    listaDesejo.forEach((item) => {
-      if(item.getTitulo() === curso.getTitulo()) return;
-    })
-    listaDesejo.push(curso);
-    usuario.setListaDesejo(listaDesejo);
+  public cadastrar(lista: IListaDesejo) {
+    const novaLista = new ListaDesejo(lista)
+    this.listaDesejoRepository.save(novaLista);
   }
 
-  public removerCurso(usuario: Comum, titulo: string): void {
-    const listaDesejo = usuario.getListaDesejo();
-    const novaListaDesejo = listaDesejo.filter((item) => {
-      return item.getTitulo() !== titulo;
-    })
-    usuario.setListaDesejo(novaListaDesejo);
+  public listar(email: string) {
+    return this.listaDesejoRepository.listar(email);
   }
 }

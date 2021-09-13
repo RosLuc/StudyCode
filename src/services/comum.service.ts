@@ -1,31 +1,43 @@
-import Comum from "../models/Comum";
+import Comum from "../entities/Comum";
+import { IComum } from "../interfaces/comum";
+import { IComumRepository } from "../interfaces/comumRepository";
 
-export default class ControllerComum {
-  private comums: Comum[];
+export class ComumService {
+  constructor(private comumRepository: IComumRepository) {}
 
-  constructor(comums: Comum[]) {
-    this.comums = comums;
-  }
+  public cadastrar(novoUsuario: IComum) {
+    const usuarioJaExiste = this.comumRepository.findByEmail(
+      novoUsuario.email
+    );
+    if (usuarioJaExiste) {
+      throw new Error("Usuário já existe");
+    }
 
-  public cadastrar(comum: Comum) {
-    this.comums.push(comum);
+    const usuarioComum = new Comum(novoUsuario);
+
+    this.comumRepository.save(usuarioComum);
   }
 
   public visualizar(email: string): Comum {
-    let comumTemp = null
-    this.comums.forEach((comum) => {
-      if (comum.getEmail() === email) comumTemp = comum;
-    });
-    return comumTemp;
+    const usuarioExiste = this.comumRepository.findByEmail(email);
+    if (!usuarioExiste) {
+      throw new Error("Usuário não encontrado");
+    }
+
+    return usuarioExiste;
   }
 
-  public listar() {
-    return this.comums;
+  public listar(): Comum[] {
+    const usuarios = this.comumRepository.listarUsuariosComum();
+    return usuarios;
   }
 
   public remover(email: string) {
-    this.comums = this.comums.filter((administrador) => {
-      return administrador.getEmail() !== email;
-    });
+    const usuarioJaExiste = this.comumRepository.findByEmail(email);
+    if (!usuarioJaExiste) {
+      throw new Error("Usuário não encontrado");
+    }
+
+   this.comumRepository.removeByEmail(email);
   }
 }

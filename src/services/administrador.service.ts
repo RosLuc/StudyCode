@@ -1,29 +1,41 @@
-import Administrador from "../models/Adiministrador";
+import Administrador from "../entities/Adiministrador";
+import { IAdministrador } from "../interfaces/administrador";
+import { IAdministradorRepository } from "../interfaces/administradorRepository";
 
-export default class AdministradorService {
-  private administradores: Administrador[];
+export class AdministradorService {
+  constructor(private administradorRepository: IAdministradorRepository) {}
 
-  constructor(administradores: Administrador[]) {
-    this.administradores = administradores;
+  public cadastrar(novoUsuario: IAdministrador) {
+    const usuarioJaExiste = this.administradorRepository.findByEmail(novoUsuario.email);
+    if (usuarioJaExiste) {
+      throw new Error("Usuário já existe");
+    }
+
+    const usuarioAdministrador = new Administrador(novoUsuario);
+
+    this.administradorRepository.save(usuarioAdministrador);
   }
 
-  public cadastrar(administrador: Administrador) {
-    this.administradores.push(administrador);
+  public visualizar(email: string): Administrador {
+    const usuarioExiste = this.administradorRepository.findByEmail(email);
+    if (!usuarioExiste) {
+      throw new Error("Usuário não encontrado");
+    }
+
+    return usuarioExiste;
   }
 
-  public visualizar(cpf: string) {
-    this.administradores.forEach((administrador) => {
-      if (administrador.getCpf() === cpf) return administrador;
-    });
+  public listar(): Administrador[] {
+    const usuarios = this.administradorRepository.listarUsuariosAdministrador();
+    return usuarios;
   }
 
-  public listar() {
-    return this.administradores;
-  }
+  public remover(email: string) {
+    const usuarioJaExiste = this.administradorRepository.findByEmail(email);
+    if (!usuarioJaExiste) {
+      throw new Error("Usuário não encontrado");
+    }
 
-  public remover(cpf: string) {
-    this.administradores = this.administradores.filter((administrador) => {
-      return administrador.getCpf() !== cpf;
-    });
+    this.administradorRepository.removeByEmail(email);
   }
 }

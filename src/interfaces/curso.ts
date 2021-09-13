@@ -1,4 +1,4 @@
-export default interface ICurso {
+export interface ICurso {
   titulo: string;
   categoria: string;
   plataformaOrigem: string;
