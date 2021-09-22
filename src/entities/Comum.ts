@@ -4,13 +4,11 @@ import { Usuario } from "./Usuario";
 export default class Comum extends Usuario {
   private fotoUrl: string;
   private areaInteresse: string;
-  // private listaDesejo: Curso[];
 
   constructor(props: IComum) {
     super(props.email, props.senha, props.nome, props.id ? props.id : null);
     this.fotoUrl = props.fotoUrl;
     this.areaInteresse = props.areaInteresse;
-    // this.listaDesejo = props.listaDesejo;
   }
 
   public setAreaInteresse(areaInteresse: string): void {
