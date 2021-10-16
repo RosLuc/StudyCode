@@ -1,5 +1,3 @@
-import { Curso } from "../entities/Curso";
-
 export interface IComum {
   id?: string;
   email: string;

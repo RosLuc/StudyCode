@@ -1,6 +1,6 @@
-import ListaDesejo from "../entities/ListaDesejo";
-import { IListaDesejo } from "../interfaces/listaDesejo";
-import { ListaDesejoRepository } from "../repositories/listaDesejo.repository";
+import { IListaDesejo } from "./interfaces/listaDesejo";
+import ListaDesejo from "./ListaDesejo";
+import { ListaDesejoRepository } from "./listaDesejo.repository";
 
 export default class ListaDesejoService {
   constructor(private listaDesejoRepository: ListaDesejoRepository) {}

@@ -1,6 +1,7 @@
-import Administrador from "../entities/Adiministrador";
-import { IAdministrador } from "../interfaces/administrador";
-import { IAdministradorRepository } from "../interfaces/administradorRepository";
+import Administrador from "./Administrador";
+import { IAdministrador } from "./interfaces/administrador";
+import { IAdministradorRepository } from "./interfaces/administradorRepository";
+
 
 export class AdministradorService {
   constructor(private administradorRepository: IAdministradorRepository) {}

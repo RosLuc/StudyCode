@@ -1,5 +1,5 @@
-import Comum from "../entities/Comum";
-import { IComumRepository } from "../interfaces/comumRepository";
+import Comum from "./Comum";
+import { IComumRepository } from "./interfaces/comumRepository";
 
 export class ComumRepository implements IComumRepository {
   private usuarios: Comum[] = [];

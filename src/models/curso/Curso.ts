@@ -1,4 +1,4 @@
-import { ICurso } from "../interfaces/curso";
+import { ICurso } from "./interfaces/curso";
 
 export class Curso {
   private titulo: string;

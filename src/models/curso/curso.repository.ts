@@ -1,5 +1,5 @@
-import { Curso } from "../entities/Curso";
-import { ICursoRepository } from "../interfaces/cursoRepository";
+import { Curso } from "./Curso";
+import { ICursoRepository } from "./interfaces/cursoRepository";
 
 export class CursoRepository implements ICursoRepository {
   private cursos: Curso[] = [];

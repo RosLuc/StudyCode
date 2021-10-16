@@ -1,4 +1,4 @@
-import { Curso } from "../entities/Curso";
+import { Curso } from "../Curso";
 
 export interface ICursoRepository {
   save(usuario: Curso): void;

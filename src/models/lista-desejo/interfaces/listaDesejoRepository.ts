@@ -1,5 +1,4 @@
-import ListaDesejo from "../entities/ListaDesejo";
-
+import ListaDesejo from "../ListaDesejo";
 
 export interface IListaDesejoRepository {
   save(listaDesejo: ListaDesejo): void;

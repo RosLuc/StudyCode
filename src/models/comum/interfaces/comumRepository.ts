@@ -1,4 +1,4 @@
-import Comum from "../entities/Comum";
+import Comum from "../Comum";
 
 export interface IComumRepository{
   save(usuario: Comum): void;

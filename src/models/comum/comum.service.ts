@@ -1,6 +1,6 @@
-import Comum from "../entities/Comum";
-import { IComum } from "../interfaces/comum";
-import { IComumRepository } from "../interfaces/comumRepository";
+import Comum from "./Comum";
+import { IComum } from "./interfaces/comum";
+import { IComumRepository } from "./interfaces/comumRepository";
 
 export class ComumService {
   constructor(private comumRepository: IComumRepository) {}

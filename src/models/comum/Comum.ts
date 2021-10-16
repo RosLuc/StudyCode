@@ -1,5 +1,5 @@
-import { IComum } from "../interfaces/comum";
-import { Usuario } from "./Usuario";
+import { Usuario } from "../user/Usuario";
+import { IComum } from "./interfaces/comum";
 
 export default class Comum extends Usuario {
   private fotoUrl: string;

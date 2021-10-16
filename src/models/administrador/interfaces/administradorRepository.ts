@@ -1,4 +1,4 @@
-import Administrador from "../entities/Adiministrador";
+import Administrador from "../Administrador";
 
 export interface IAdministradorRepository{
   save(usuario: Administrador): void;

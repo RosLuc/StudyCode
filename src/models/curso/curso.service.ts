@@ -1,6 +1,6 @@
-import { Curso } from "../entities/Curso";
-import { ICurso } from "../interfaces/curso";
-import { ICursoRepository } from "../interfaces/cursoRepository";
+import { Curso } from "./Curso";
+import { ICurso } from "./interfaces/curso";
+import { ICursoRepository } from "./interfaces/cursoRepository";
 
 export class CursoService {
   constructor(private cursoRepository: ICursoRepository) {}
